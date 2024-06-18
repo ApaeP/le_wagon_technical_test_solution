@@ -10,11 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_18_200654) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_18_202942) do
+  create_table "bookings", force: :cascade do |t|
+    t.integer "listing_id", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["listing_id"], name: "index_bookings_on_listing_id"
+  end
+
   create_table "listings", force: :cascade do |t|
     t.integer "num_rooms"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "reservations", force: :cascade do |t|
+    t.integer "listing_id", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["listing_id"], name: "index_reservations_on_listing_id"
+  end
+
+  add_foreign_key "bookings", "listings"
+  add_foreign_key "reservations", "listings"
 end

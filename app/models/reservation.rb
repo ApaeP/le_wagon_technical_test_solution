@@ -1,6 +1,7 @@
 class Reservation < ApplicationRecord
   include StartDateBeforeEndDateValidator
   include OverlappingDatesValidator
+  include DestroyMissions
 
   belongs_to :listing
 
